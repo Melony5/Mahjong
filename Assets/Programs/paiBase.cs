@@ -8,10 +8,10 @@ public class paiBase : MonoBehaviour
     private int number;
 
     public int getType(int type) {
-        return type;
+        return this.type;
     }
 
     public int getNumber(int number) {
-        return number;
+        return this.number;
     }
 }
