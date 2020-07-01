@@ -8,6 +8,12 @@ public class paiBase : MonoBehaviour
     public enum num {ii = 1, ryan, san, su, uu, ro, chi, pa,
                       kyu, haku, hatsu, chun, ton, nan, sya, pe};
 
-    GameObject[,] pai = new GameObject[5, 16];
+    GameObject[,] pai;
+
+    paiBase() {
+        pai = new GameObject[5, 16];
+
+        
+    }
 
 }
