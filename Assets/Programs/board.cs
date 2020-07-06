@@ -14,7 +14,10 @@ public class board : MonoBehaviour
     private List<GameObject> naki;  // 鳴きでとった牌を格納
 
     private int dice1, dice2;       // 王牌を決めるサイコロ
-    private int[] paiSort;
+    private int[] yamaTemp;
+    private int parent;
+
+    System.Random yamaInit;
 
     // Start is called before the first frame update
     board() {
@@ -25,13 +28,21 @@ public class board : MonoBehaviour
         kawa = new GameObject[4, 100];// とりあえず100にしといた
         naki = new List<GameObject>();
 
-        paiSort = new int[136];
+        yamaTemp = new int[136];
+
+        for(int i = 0; i < 136; i++) {
+            yamaTemp[i] = i;
+        }
+
+        yamaInit = new System.Random();
     }
 
     // 開門する（王牌を決める）
      public void kaimen() {
         dice1 = UnityEngine.Random.Range(1, 7);
         dice2 = UnityEngine.Random.Range(1, 7);
+
+        //TODO: ここでサイコロとかを見せる演出があるといい
 
         if(dice1 + dice2 < 7) {
             // 北家からとって来る処理
@@ -43,7 +54,24 @@ public class board : MonoBehaviour
    
     // 洗牌
     public void shipai() {
-        // 牌のシャッフル＆paiSort[]に格納
+        // 牌のシャッフルyama[]に格納
+        int yamaLen = yamaTemp.Length;
+
+        while(yamaLen > 1) {
+            yamaLen--;
+            int k = yamaInit.Next(yamaLen + 1);
+            int temp = yamaTemp[k];
+            yamaTemp[k] = yamaTemp[yamaLen];
+            yamaTemp[yamaLen] = temp;
+        }
+
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 4; j++) {
+                for(int k = 0; k < 9; k++) {
+                    yama[yamaTemp[i]] = paiBase.pai[i, j, k];
+                }
+            }
+        }
     }  
     
     // 配牌
