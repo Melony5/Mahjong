@@ -12,7 +12,7 @@ public class RisingJudgment : MonoBehaviour
 
     //任意の手牌とその次とが対子どうかを調べて真偽を返す
     int CheckToitu(int[][] tehai, int i) {
-        int count = 0;
+        int count = 0;//連続何枚繋がってるか
         if (tehai[playerTurn][i] == tehai[playerTurn][i + 1]) {
             count++;
             if (tehai[playerTurn][i + 1] == tehai[playerTurn][i + 2]) {
@@ -38,17 +38,40 @@ public class RisingJudgment : MonoBehaviour
     //七対子の場合
 
     int checkKind(int[][] tehai) {
-        int count = 0;//種類の数
-        return count;
+        int kindCount = 0;//種類の数
+        for (int i = 0; i < 12; i++) {
+            if (tehai[playerTurn][i] != tehai[playerTurn][i + 1]) {
+                kindCount++;
+            }
+        }
+    return kindCount+1;
     }
         //牌の種類を求める必要がある
-    int SyantenTitoi() {
+    int SyantenTitoi(int[][] tehai) {
         int syanten = 0;
+        int kind = 0;
         int toitu = 0;
-        for(int i = 0; i < 13; i++) {
-            
+        for(int i = 0; i < 12; i++) {
+            if(CheckToitu(tehai,i) == 1) {
+                toitu++;
+            }
         }
+        kind = checkKind(tehai);
+        syanten = 6 - toitu+(7 - kind);
         return syanten;
     }
+
+    int checkTatu(int[][] tehai) {
+        int tatu = 0;
+        for(int i = 0; i < 13; i++) {
+
+        }
+        return tatu;  
+    }
         //一般の場合
+    int SyantenGeneral(int[][] tehai) {
+        int syanten = 0;
+
+        return syanten;
+    }
     }
