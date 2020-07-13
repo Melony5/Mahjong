@@ -7,9 +7,12 @@ using System;
 public class board : MonoBehaviour
 {
     paiBase pai;
-    private GameObject[] yama;      // 山牌
+    public static int playerNum;        // プレイヤー数
+    public static int wanpaiNum;        // 王牌の数
+    private List<GameObject> yama;      // 山牌
+    private List<GameObject>[] tehai;   // 手牌
+
     private GameObject[] wanpai;    // 王牌
-    private GameObject[,] tehai;    // 手牌×4
     private GameObject[,] kawa;     // 河（捨て牌置き場）×４
     private List<GameObject> naki;  // 鳴きでとった牌を格納
 
@@ -18,6 +21,11 @@ public class board : MonoBehaviour
     private int parent;
 
     System.Random yamaInit;
+
+    static board() {
+        playerNum = 4;
+        wanpaiNum = 2 * 7;
+    }
 
     // Start is called before the first frame update
     board() {
@@ -39,12 +47,12 @@ public class board : MonoBehaviour
 
     // 開門する（王牌を決める）
      public void kaimen() {
-        dice1 = UnityEngine.Random.Range(1, 7);
-        dice2 = UnityEngine.Random.Range(1, 7);
+        dice1 = UnityEngine.Random.Range(1, 4);
 
         //TODO: ここでサイコロとかを見せる演出があるといい
 
         if(dice1 + dice2 < 7) {
+
             // 北家からとって来る処理
             // wanpai[]に格納
         } else {
@@ -60,6 +68,7 @@ public class board : MonoBehaviour
         while(yamaLen > 1) {
             yamaLen--;
             int k = yamaInit.Next(yamaLen + 1);
+
             int temp = yamaTemp[k];
             yamaTemp[k] = yamaTemp[yamaLen];
             yamaTemp[yamaLen] = temp;
