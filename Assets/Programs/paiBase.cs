@@ -5,7 +5,7 @@ using System;
 
 public class paiBase : MonoBehaviour
 {
-     int PAIAll = 136; // 牌全体の個数
+    public static int PAIAll; // 牌全体の個数
 
     static public GameObject[,,] pai;   // 全ての牌ゲームオブジェクトを格納
     public enum kind{manzu, sozu, pinzu, sangen, fon};  // 牌の種類
@@ -17,6 +17,8 @@ public class paiBase : MonoBehaviour
     }
 
     static paiBase() {
+        PAIAll = 136;
+
         kindNum = Enum.GetValues(typeof(kind)).Length;
         numNum = Enum.GetValues(typeof(num)).Length;
 
