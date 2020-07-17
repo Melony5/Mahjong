@@ -71,7 +71,17 @@ public class RisingJudgment : MonoBehaviour
         //一般の場合
     int SyantenGeneral(int[][] tehai) {
         int syanten = 0;
+        /*①雀頭候補を全てみつける
+          ②刻子をとって組合せを決める
+          */
+          for(int i = 0; i < 13; i++) {
+            if(tehai[playerTurn][i] == tehai[playerTurn][i + 1]) {
+                //ここに処理を書く
+                int[] array = new int[5];
+                Array.Copy(tehai[playerTurn], i, array, 0, 13);
 
+            }
+        }
         return syanten;
     }
     }
